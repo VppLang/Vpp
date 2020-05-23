@@ -1,0 +1,52 @@
+$ nothing final here, just a rough outline of the syntax $
+
+import math
+
+$ dollar sign for comments $
+
+dynam class Dave[] $ [] for any parent classes Dave inherits $
+{
+	dynam var m_age = 42; $ stat means user can't manually delete the var $
+	dynam var m_money = 255; $ can't have stat vars in dynam class
+
+	dynam name = "Davieo"; 
+
+	func goBankRupt()
+	{
+		m_money = 0;
+	}
+}
+
+stat class Ruckle[]
+{
+	dynam var nuckles = 5; $ can have dynam in a stat class $
+}
+
+func main()
+{
+	stat Dave davieBoi;
+
+	write(davieBoi.m_money); // everything in a class will be public, im thinking
+
+	write("Hello, V++World!");
+
+	if [davieBoi.m_money > 10]
+	{
+		write("Davie is rich. Too rich.");
+	}
+	elif [davieBoi.m_money == 1]
+	{
+		write(davieBoi.m_name + "Davie only has 1 dollar.");
+	}
+	else
+	{
+		write("I have no idea how much money davie has.")
+	}
+
+
+	for [10]
+	{
+		write("count to 10");
+	}
+
+}
