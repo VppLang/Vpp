@@ -6,7 +6,7 @@ V++ Math functions
 */
 #include <math.h>
 #include <vector>
-#include "Vector2d.h"
+#include "Vector2d.hpp"
 
 
 class vppMath
