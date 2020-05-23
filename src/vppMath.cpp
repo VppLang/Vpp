@@ -58,7 +58,7 @@ std::vector<float> vppMath::bubbleSort(std::vector<float> a)
 {
 
 	bool notSorted = false;
-	int lastSorted = a.size() - 1;
+	size_t lastSorted = a.size() - 1;
 
 	int swaps = 0;
 	while (!notSorted) {
