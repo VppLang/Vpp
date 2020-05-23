@@ -26,7 +26,7 @@ func main()
 {
 	stat Dave davieBoi;
 
-	write(davieBoi.m_money); // everything in a class will be public, im thinking
+	write(davieBoi.m_money); $ everything in a class will be public, im thinking $
 
 	write("Hello, V++World!");
 
