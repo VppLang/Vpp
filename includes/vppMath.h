@@ -26,7 +26,8 @@ public:
 	Vector2d normalize(Vector2d vectorToNormalize);
 	Vector2d normalize(float x , float y);
 	std::vector<float> bubbleSort(std::vector<float> a);
-	
+   	constexpr double rad_to_degree(float radian);
+
 
  private:
 	 double pi = 3.14;
