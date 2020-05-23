@@ -2,7 +2,7 @@
 
 #include "TokenType.hpp"
 
-namespace token
+namespace lexer
 {
 	
 	class Token

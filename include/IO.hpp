@@ -8,4 +8,3 @@
 #include <string>
 
 std::string loadFile(std::string& p_fileName);
-
