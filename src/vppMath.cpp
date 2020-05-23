@@ -80,3 +80,8 @@ std::vector<float> vppMath::bubbleSort(std::vector<float> a)
 
  
 
+constexpr double vppMath::rad_to_degree(float radian)
+{
+		return radian * (180.f /  this->pi);
+
+}
