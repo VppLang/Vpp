@@ -1,5 +1,5 @@
  
-#include "vppMath.h"
+#include "vppMath.hpp"
 
 double vppMath::pythagorasTheorem(double a, double b)
 {
