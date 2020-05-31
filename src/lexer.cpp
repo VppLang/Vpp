@@ -261,7 +261,7 @@ namespace lexer
             	else
             	{
             		hasError = true;
-            		// need to print out "unexpected character: c"
+            		std::cout << "Line " << line << ": Unexpected character " << c << std::endl;
             	}
             	break;
         }

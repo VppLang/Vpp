@@ -3,7 +3,7 @@
 #include <array>
 #include <string>
 
-namespace token
+namespace lexer
 {
 
 	std::array<std::string, 47> tokenNames =
@@ -39,7 +39,7 @@ namespace token
 		"if",
 		"or",
 		"else",
-		"elseif",
+		"elif",
 		"for",
 		"while",
 		"break",
