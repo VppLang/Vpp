@@ -29,7 +29,7 @@ namespace lexer
 		IDENTIFIER, STRING, NUMBER,
 
 		// Keywords
-		AND, IF, OR, ELSE, ELSEIF, FOR, 
+		AND, IF, OR, ELSE, ELIF, FOR, 
 		WHILE, BREAK, RETURN, TRUE, FALSE,  
 		CLASS, THIS, FUNC, ZIL, PRINT, 
 	    VAR, STAT, DYNAM, 

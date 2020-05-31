@@ -7,4 +7,5 @@
 #include <sstream>
 #include <string>
 
-std::string loadFile(std::string& p_fileName);
+std::string loadFile(const char* p_fileName);
+

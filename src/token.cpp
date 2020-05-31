@@ -3,11 +3,11 @@
 #include <iostream>
 #include <sstream>
 
-namespace token
+namespace lexer
 {
 
 	Token::Token()
-	:type(token::TokenType::INVALID),
+	:type(TokenType::INVALID),
 	lexeme("empty lexeme"),
 	literal("empty literal"),
 	line(-1)
