@@ -52,7 +52,7 @@ RMFLAGS := -f
 # recipes
 
 all: $(TARGET)
-	@echo "$(GREEN)Build complete!$(NC)\n"
+	@echo "$(GREEN)Build complete!$(NC)"
 
 $(TARGET): $(OBJECTS)
 	@echo "$(BLUE)... making $(YELLOW)$@ $(BLUE)...$(NC)\n"
@@ -68,7 +68,7 @@ clean:
 	@echo "$(RED)... cleaning up ...$(NC)\n"
 	$(RM) $(RMFLAGS) $(OBJECTS) $(DEPS) $(TARGET)
 	@echo ""
-	@echo "$(RED)Cleaning complete!$(NC)\n"
+	@echo "$(RED)Cleaning complete!$(NC)"
 
 # from the generated dependency files
 
