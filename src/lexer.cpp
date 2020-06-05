@@ -6,10 +6,12 @@
 
 #include <iostream>
 #include <map>
+#include <string>
 
 #include "Lexer.hpp"
 #include "Token.hpp"
 #include "TokenType.hpp"
+#include "Logger.hpp"
 
 namespace lexer
 {
@@ -225,7 +227,11 @@ namespace lexer
 				// it there was no closing $
     			if (nesting > 0)
     			{	
-    				std::cout << "Expected closing $ for comment. Line " << line << std::endl;
+                    logger::Logger::get_instance()
+                        .emplace_back
+                        (
+                            "Expected closing $ for comment. Line " + std::to_string(line)
+                        );
     				hasError = true;
     			}
 	
@@ -261,7 +267,12 @@ namespace lexer
             	else
             	{
             		hasError = true;
-            		std::cout << "Line " << line << ": Unexpected character " << c << std::endl;
+                    logger::Logger::get_instance()
+                        .emplace_back
+                        (
+                            "Line " + std::to_string(line)
+                            + ": Unexpected character " + c
+                        );
             	}
             	break;
         }

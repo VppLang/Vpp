@@ -9,6 +9,7 @@
 #include "ParserExpressions.hpp"
 #include "ExpressionPrinter.hpp"
 
+#include "Logger.hpp"
 
 
 int main()
@@ -23,6 +24,14 @@ int main()
     parser::Expression* e = parser.parse_tokens(tokens);
 
     parser::print_expression(e);
+
+    // printing the logs
+    if(not logger::Logger::get_instance().empty())
+    {
+        std::cerr << "Logs:" << std::endl;
+        std::cerr << logger::Logger::get_instance();
+        return 1;
+    }
 
     delete e;
 
