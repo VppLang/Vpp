@@ -16,7 +16,7 @@ int main()
 {	
     // create the tokens
 	lexer::Lexer lexer;
-	lexer.loadSource(loadFile("examples/example.vpp"));
+	lexer.loadSource(io::loadFile("examples/example.vpp"));
     std::vector<lexer::Token> tokens = lexer.getTokens();
 
     // parse the tokens
@@ -25,13 +25,38 @@ int main()
 
     parser::print_expression(e);
 
-    // printing the logs
-    if(not logger::Logger::get_instance().empty())
+    // test logs
     {
-        std::cerr << "Logs:" << std::endl;
-        std::cerr << logger::Logger::get_instance();
-        return 1;
+        logger::Logger::get_instance().emplace_back
+            (
+                logger::LogType::error, // log type: [error / warning / note]
+                "dummy error",          // log message
+                1,                      // line number: optional; 1-based indexing
+                1                       // character number: optional; 1-based indexing
+            );
+        logger::Logger::get_instance().emplace_back
+            (
+                logger::LogType::error,
+                "dummy error without line number and character number"
+            );
+        logger::Logger::get_instance().emplace_back
+            (
+                logger::LogType::warning,
+                "dummy warning",
+                52,
+                1
+            );
+        logger::Logger::get_instance().emplace_back
+            (
+                logger::LogType::note,
+                "dummy note without character number",
+                3
+            );
     }
+
+    // printing the logs
+    std::cerr << "Logs:" << std::endl;
+    std::cerr << logger::Logger::get_instance();
 
     delete e;
 

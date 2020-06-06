@@ -2,10 +2,14 @@
 
 #pragma once
 
-#include <iostream>
-#include <fstream>
-#include <sstream>
 #include <string>
+#include <vector>
 
-std::string loadFile(const char* p_fileName);
+namespace io
+{
+    using std::vector;
+    using std::string;
 
+    extern vector<string> lines; // stores the lines of the input file
+    string loadFile(const char* p_fileName);
+}

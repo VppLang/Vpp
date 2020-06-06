@@ -52,6 +52,7 @@ namespace lexer
 		unsigned start;
 		size_t current;
 		unsigned line;
+        unsigned character_number;
 
 		// eventually insert a Logger object here
 
