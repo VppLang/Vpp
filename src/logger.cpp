@@ -79,7 +79,7 @@ namespace logger
                         stream << " ";
                     }
                 }
-                stream << "\033[1;31;40m^\033[0m";
+                stream << "\033[1;32;40m^\033[0m";
             }
         }
         
