@@ -47,7 +47,7 @@ namespace logger
     {
         if(log.m_line)
         {
-            stream << "\033[0;1;47m@Line " << log.m_line;
+            stream << "\033[1;30;47m@Line " << log.m_line;
             if(log.m_char_number)
             {
                 stream << ":" << log.m_char_number;
