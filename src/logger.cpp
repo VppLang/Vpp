@@ -20,9 +20,9 @@ namespace logger
 
     const map<LogType, string> Log::mp
     {
-        {LogType::error,    "\033[1;31m" "error: "      "\033[1;0m"},
-        {LogType::warning,  "\033[1;35m" "warning: "    "\033[1;0m"},
-        {LogType::note,     "\033[1;36m" "note: "       "\033[1;0m"},
+        {LogType::error,    "\033[1;31;40m" "ERROR:"   "\033[0m" " "},
+        {LogType::warning,  "\033[1;33;40m" "WARNING:" "\033[0m" " "},
+        {LogType::note,     "\033[1;36;40m" "NOTE:"    "\033[0m" " "},
     };
 
     Log::Log(const LogType log_type, const string& message, const size_t line, const size_t char_number)
@@ -47,23 +47,23 @@ namespace logger
     {
         if(log.m_line)
         {
-            stream << "\033[1m@line " << log.m_line;
+            stream << "\033[0;1;47m@Line " << log.m_line;
             if(log.m_char_number)
             {
                 stream << ":" << log.m_char_number;
             }
-            stream << ": \033[0m";
+            stream << ":\033[0m ";
         }
 
         stream
             << Log::mp.at(log.m_log_type)
-            << log.m_message
+            << "\033[1;3;37;40m" << log.m_message << "\033[0m"
             ;
 
         if(log.m_line)
         {
             const auto line{io::lines[log.m_line - 1]};
-            stream << "\n\t" << line;
+            stream << "\n\t\033[0m" << line << "\033[0m";
 
             if(log.m_char_number)
             {
@@ -79,9 +79,11 @@ namespace logger
                         stream << " ";
                     }
                 }
-                stream << "\033[1;31m^\033[0m";
+                stream << "\033[1;31;40m^\033[0m";
             }
         }
+        
+        stream << endl;
 
         return stream;
     }
