@@ -55,7 +55,6 @@ int main()
     }
 
     // printing the logs
-    std::cerr << "Logs:" << std::endl;
     std::cerr << logger::Logger::get_instance();
 
     delete e;
