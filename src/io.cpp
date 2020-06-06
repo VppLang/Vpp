@@ -13,10 +13,14 @@ namespace io
     using std::stringstream;
     using std::getline;
 
+    string file_name;
+
     vector<string> lines;
 
     string loadFile(const char* p_fileName)
     {
+        file_name = p_fileName;
+
         ifstream inFile (p_fileName);
         stringstream source;
         source << inFile.rdbuf();
