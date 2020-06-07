@@ -90,18 +90,6 @@ namespace VPP
 
     /*** class Logger ***/
 
-    Logger::Logger()
-        :
-            m_logs{}
-    {
-    }
-
-    Logger& Logger::get_instance()
-    {
-        static Logger instance;
-        return instance;
-    }
-
     bool Logger::empty() const
     {
         return m_logs.empty();
@@ -140,5 +128,12 @@ namespace VPP
         }
 
         return stream;
+    }
+
+    Logger& operator<<(Logger& logger, const Log& log)
+    {
+        logger.m_logs.emplace_back(log);
+
+        return logger;
     }
 }

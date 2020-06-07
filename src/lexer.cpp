@@ -39,11 +39,12 @@ namespace VPP
 		{"dynam", TokenType::DYNAM}
 	};
 
-	Lexer::Lexer()
+	Lexer::Lexer(Logger& p_logger)
 	:start(0),
 	current(0),
 	line(0),
     character_number(0),
+    logger{p_logger},
 	hasError(false)
 	{
 	}
@@ -242,8 +243,7 @@ namespace VPP
 				// it there was no closing $
     			if (nesting > 0)
     			{	
-                    Logger::get_instance()
-                        .emplace_back
+                    logger << Log
                         (
                             LogType::error,
                             "Expected closing $ for comment",
@@ -285,13 +285,12 @@ namespace VPP
             	else
             	{
             		hasError = true;
-                    Logger::get_instance()
-                        .emplace_back
-                        (
+                    logger << Log
+                        {
                             LogType::error,
                             "Unexpected character " + c,
                             line
-                        );
+                        };
             	}
             	break;
         }

@@ -14,8 +14,11 @@
 
 int main()
 {	
+    // create the logger
+    VPP::Logger logger;
+
     // create the tokens
-	VPP::Lexer lexer;
+	VPP::Lexer lexer(logger);
 	lexer.loadSource(VPP::loadFile("examples/example.vpp"));
     std::vector<VPP::Token> tokens = lexer.getTokens();
 
@@ -27,26 +30,33 @@ int main()
 
     // test logs
     {
-        VPP::Logger::get_instance().emplace_back
+        logger.emplace_back
             (
                 VPP::LogType::error,    // log type: [error / warning / note]
                 "dummy error",          // log message
                 1,                      // line number: optional; 1-based indexing
                 1                       // character number: optional; 1-based indexing
             );
-        VPP::Logger::get_instance().emplace_back
+        logger << VPP::Log
+            { /* {/( */
+                VPP::LogType::error,
+                "dummy error logged using '<<'",
+                1,
+                5
+            } /* }/) */ ;
+        logger << VPP::Log
             (
                 VPP::LogType::error,
                 "dummy error without line number and character number"
             );
-        VPP::Logger::get_instance().emplace_back
+        logger.emplace_back
             (
                 VPP::LogType::warning,
                 "dummy warning",
                 52,
                 1
             );
-        VPP::Logger::get_instance().emplace_back
+        logger.emplace_back
             (
                 VPP::LogType::note,
                 "dummy note without character number",
@@ -55,7 +65,7 @@ int main()
     }
 
     // printing the logs
-    std::cerr << VPP::Logger::get_instance();
+    std::cerr << logger;
 
     delete e;
 

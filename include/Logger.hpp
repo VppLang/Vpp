@@ -36,12 +36,8 @@ namespace VPP
 
     class Logger
     {
-        Logger();
         vector<Log> m_logs;
     public:
-        static Logger& get_instance();
-        Logger(const Logger&) = delete;
-        void operator=(const Logger&) = delete;
         bool empty() const;
         auto get_logs() const;
         void emplace_back(const Log& log);
@@ -49,5 +45,6 @@ namespace VPP
         void emplace_back(const LogType log_type, const char* message, const size_t line = 0u, const size_t char_number = 0u);
         void clear();
         friend ostream& operator<<(ostream& stream, const Logger& logger);
+        friend Logger& operator<<(Logger& logger, const Log& log);
     };
 }
