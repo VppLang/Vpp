@@ -39,7 +39,6 @@ namespace VPP
         vector<Log> m_logs;
     public:
         bool empty() const;
-        auto get_logs() const;
         void emplace_back(const Log& log);
         void emplace_back(const LogType log_type, const string& message, const size_t line = 0u, const size_t char_number = 0u);
         void emplace_back(const LogType log_type, const char* message, const size_t line = 0u, const size_t char_number = 0u);
