@@ -48,6 +48,10 @@ int main()
             (
                 VPP::LogType::error,
                 "dummy error without line number and character number"
+            ) << VPP::Log               // can be chained
+            (
+                VPP::LogType::error,
+                "chained dummy error without line number and character number"
             );
         logger.emplace_back
             (
