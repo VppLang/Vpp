@@ -23,7 +23,7 @@ namespace VPP
 
     class Log
     {
-        const static map<LogType, string> mp;
+        const static map<LogType, string> log_type_to_string;
         LogType m_log_type;
         string m_message;
         size_t m_line;

@@ -18,7 +18,7 @@ namespace VPP
 
     /*** class Log ***/
 
-    const map<LogType, string> Log::mp
+    const map<LogType, string> Log::log_type_to_string
     {
         {LogType::error,    " " "\033[1;31;40m" "ERROR:"   "\033[0m" " "},
         {LogType::warning,  " " "\033[1;33;40m" "WARNING:" "\033[0m" " "},
@@ -60,7 +60,7 @@ namespace VPP
             }
         }
         stream
-            << Log::mp.at(log.m_log_type)                       // log type
+            << Log::log_type_to_string.at(log.m_log_type)       // log type
             << "\033[1;3;37;40m" << log.m_message << "\033[0m"  // log message
             ;
 
