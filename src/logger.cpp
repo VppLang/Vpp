@@ -16,14 +16,22 @@ namespace VPP
     using std::map;
     using std::endl;
 
-    /*** class Log ***/
+    const static string NOC{"\033[0m"};
+    const static string RED{"\033[1;31;40m"};
+    const static string YEL{"\033[1;33;40m"};
+    const static string BLU{"\033[1;36;40m"};
+    const static string LOC{"\033[1;30;47m"};
+    const static string MSG{"\033[1;3;37;40m"};
+    const static string IND{"\033[1;32;40m"};
 
-    const map<LogType, string> Log::log_type_to_string
+    const static map<LogType, string> log_type_to_string
     {
-        {LogType::error,    " " "\033[1;31;40m" "ERROR:"   "\033[0m" " "},
-        {LogType::warning,  " " "\033[1;33;40m" "WARNING:" "\033[0m" " "},
-        {LogType::note,     " " "\033[1;36;40m" "NOTE:"    "\033[0m" " "},
+        {LogType::error,    " " + RED + "ERROR:"    + NOC + " "},
+        {LogType::warning,  " " + YEL + "WARNING:"  + NOC + " "},
+        {LogType::note,     " " + BLU + "NOTE:"     + NOC + " "},
     };
+
+    /*** class Log ***/
 
     Log::Log(const LogType log_type, const string& message, const size_t line, const size_t char_number)
         :
@@ -45,29 +53,29 @@ namespace VPP
 
     ostream& operator<<(ostream& stream, const Log& log)
     {
-        // file name:
-        stream << "\033[1;30;47m" << file_name << ":\033[0m";
+        stream << LOC << file_name << ":";
 
         if(log.m_line)
         {
-            // line number
-            stream << "\033[1;30;47m" << log.m_line << ":\033[0m";
+            stream << log.m_line << ":";
 
             if(log.m_char_number)
             {
-                // character number
-                stream << "\033[1;30;47m" << log.m_char_number << ":\033[0m";
+                stream << log.m_char_number << ":";
             }
         }
+
+        stream << NOC;
+
         stream
-            << Log::log_type_to_string.at(log.m_log_type)       // log type
-            << "\033[1;3;37;40m" << log.m_message << "\033[0m"  // log message
+            << log_type_to_string.at(log.m_log_type)
+            << MSG << log.m_message << NOC
             ;
 
         if(log.m_line)
         {
             const auto line{lines[log.m_line - 1]};
-            stream << "\n\t\033[0m" << line << "\033[0m";       // concerned line
+            stream << "\n\t" << NOC << line;
 
             // indicator
             if(log.m_char_number)
@@ -84,11 +92,11 @@ namespace VPP
                         stream << " ";
                     }
                 }
-                stream << "\033[1;32;40m^\033[0m";              // ^
+                stream << IND << "^" << NOC;
             }
         }
         
-        stream << endl;
+        stream << "\n";
 
         return stream;
     }
