@@ -75,12 +75,14 @@ namespace VPP
         if(log.m_line)
         {
             const auto line{lines[log.m_line - 1]};
+
             stream << "\n\t" << NOC << line;
 
-            // indicator
             if(log.m_char_number)
             {
                 stream << "\n\t";
+
+                // moving the cursor to the appropriate location
                 for(size_t i = 0; i < log.m_char_number - 1; ++i)
                 {
                     if(line[i] == '\t')
@@ -92,6 +94,7 @@ namespace VPP
                         stream << " ";
                     }
                 }
+
                 stream << IND << "^" << NOC;
             }
         }

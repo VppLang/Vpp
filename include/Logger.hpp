@@ -5,14 +5,12 @@
 #include <ostream>
 #include <vector>
 #include <string>
-#include <map>
 
 namespace VPP
 {
     using std::vector;
     using std::string;
     using std::ostream;
-    using std::map;
 
     enum class LogType
     {
