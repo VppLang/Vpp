@@ -3,7 +3,7 @@
 #include <array>
 #include <string>
 
-namespace lexer
+namespace VPP
 {
 
 	std::array<std::string, 47> tokenNames =

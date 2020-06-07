@@ -13,7 +13,7 @@
 #include "TokenType.hpp"
 #include "Logger.hpp"
 
-namespace lexer
+namespace VPP
 {
 
 	static std::map<std::string, TokenType> sKeyWords = 
@@ -242,10 +242,10 @@ namespace lexer
 				// it there was no closing $
     			if (nesting > 0)
     			{	
-                    logger::Logger::get_instance()
+                    Logger::get_instance()
                         .emplace_back
                         (
-                            logger::LogType::error,
+                            LogType::error,
                             "Expected closing $ for comment",
                             line_start,
                             character_number_start
@@ -285,10 +285,10 @@ namespace lexer
             	else
             	{
             		hasError = true;
-                    logger::Logger::get_instance()
+                    Logger::get_instance()
                         .emplace_back
                         (
-                            logger::LogType::error,
+                            LogType::error,
                             "Unexpected character " + c,
                             line
                         );

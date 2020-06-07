@@ -10,7 +10,7 @@
 
 #include "Token.hpp"
 
-namespace lexer
+namespace VPP
 {
 	class Lexer
 	{

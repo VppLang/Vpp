@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-namespace io
+namespace VPP
 {
     using std::vector;
     using std::string;

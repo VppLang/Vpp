@@ -15,47 +15,47 @@
 int main()
 {	
     // create the tokens
-	lexer::Lexer lexer;
-	lexer.loadSource(io::loadFile("examples/example.vpp"));
-    std::vector<lexer::Token> tokens = lexer.getTokens();
+	VPP::Lexer lexer;
+	lexer.loadSource(VPP::loadFile("examples/example.vpp"));
+    std::vector<VPP::Token> tokens = lexer.getTokens();
 
     // parse the tokens
-    parser::Parser parser;
-    parser::Expression* e = parser.parse_tokens(tokens);
+    VPP::Parser parser;
+    VPP::Expression* e = parser.parse_tokens(tokens);
 
-    parser::print_expression(e);
+    VPP::print_expression(e);
 
     // test logs
     {
-        logger::Logger::get_instance().emplace_back
+        VPP::Logger::get_instance().emplace_back
             (
-                logger::LogType::error, // log type: [error / warning / note]
+                VPP::LogType::error,    // log type: [error / warning / note]
                 "dummy error",          // log message
                 1,                      // line number: optional; 1-based indexing
                 1                       // character number: optional; 1-based indexing
             );
-        logger::Logger::get_instance().emplace_back
+        VPP::Logger::get_instance().emplace_back
             (
-                logger::LogType::error,
+                VPP::LogType::error,
                 "dummy error without line number and character number"
             );
-        logger::Logger::get_instance().emplace_back
+        VPP::Logger::get_instance().emplace_back
             (
-                logger::LogType::warning,
+                VPP::LogType::warning,
                 "dummy warning",
                 52,
                 1
             );
-        logger::Logger::get_instance().emplace_back
+        VPP::Logger::get_instance().emplace_back
             (
-                logger::LogType::note,
+                VPP::LogType::note,
                 "dummy note without character number",
                 3
             );
     }
 
     // printing the logs
-    std::cerr << logger::Logger::get_instance();
+    std::cerr << VPP::Logger::get_instance();
 
     delete e;
 

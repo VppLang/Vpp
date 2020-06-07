@@ -2,7 +2,7 @@
 
 #include "TokenType.hpp"
 
-namespace lexer
+namespace VPP
 {
 	
 	class Token

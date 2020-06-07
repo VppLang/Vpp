@@ -8,7 +8,7 @@
 #include <string>
 #include <map>
 
-namespace logger
+namespace VPP
 {
     using std::vector;
     using std::string;
@@ -47,7 +47,7 @@ namespace logger
     {
         if(log.m_line)
         {
-            stream << "\033[1;30;47m" << io::file_name << ":" << log.m_line;
+            stream << "\033[1;30;47m" << file_name << ":" << log.m_line;
             if(log.m_char_number)
             {
                 stream << ":" << log.m_char_number;
@@ -62,7 +62,7 @@ namespace logger
 
         if(log.m_line)
         {
-            const auto line{io::lines[log.m_line - 1]};
+            const auto line{lines[log.m_line - 1]};
             stream << "\n\t\033[0m" << line << "\033[0m";
 
             if(log.m_char_number)

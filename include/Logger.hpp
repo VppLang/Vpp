@@ -7,7 +7,7 @@
 #include <string>
 #include <map>
 
-namespace logger
+namespace VPP
 {
     using std::vector;
     using std::string;
