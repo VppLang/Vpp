@@ -103,6 +103,18 @@ namespace VPP
         return m_logs.empty();
     }
 
+    const Log& Logger::operator[](const int index) const
+    {
+        if(index >= 0)
+        {
+            return m_logs[index];
+        }
+        else
+        {
+            return m_logs[static_cast<int>(m_logs.size()) + index];
+        }
+    }
+
     void Logger::emplace_back(const Log& log)
     {
         m_logs.emplace_back(log);
@@ -118,6 +130,13 @@ namespace VPP
         emplace_back(log_type, string{message}, line, char_number);
     }
 
+    Logger& Logger::operator<<(const Log& log)
+    {
+        m_logs.emplace_back(log);
+
+        return *(this);
+    }
+
     void Logger::clear()
     {
         m_logs.clear();
@@ -131,12 +150,5 @@ namespace VPP
         }
 
         return stream;
-    }
-
-    Logger& operator<<(Logger& logger, const Log& log)
-    {
-        logger.m_logs.emplace_back(log);
-
-        return logger;
     }
 }

@@ -67,6 +67,11 @@ int main()
     // printing the logs
     std::cerr << logger;
 
+    // like the Lua/C API, supports
+    // integral indexing
+    std::cerr << logger[2];
+    std::cerr << logger[-2];
+
     delete e;
 
     return 0;
