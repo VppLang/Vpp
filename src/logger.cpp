@@ -51,17 +51,14 @@ namespace VPP
         if(log.m_line)
         {
             // line number
-            stream << "\033[1;30;47m" << ":" << log.m_line;
+            stream << "\033[1;30;47m" << log.m_line << ":\033[0m";
 
             if(log.m_char_number)
             {
                 // character number
-                stream << ":" << log.m_char_number;
+                stream << "\033[1;30;47m" << log.m_char_number << ":\033[0m";
             }
-
-            stream << ":\033[0m";
         }
-
         stream
             << Log::mp.at(log.m_log_type)                       // log type
             << "\033[1;3;37;40m" << log.m_message << "\033[0m"  // log message
