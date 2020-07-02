@@ -38,7 +38,7 @@ STD := -std=c++17
 SANITIZE := -fsanitize=address -fno-omit-frame-pointer
 ARCH := $(shell getconf LONG_BIT)
 MODE := -m$(ARCH)
-DEBUG := -g
+DEBUG := -g -D_GLIBCXX_DEBUG
 WARNINGS := -Wall
 INCLUDE_FLAG := -I $(INCLUDE)
 MAKE_DEPS := -MMD -MP

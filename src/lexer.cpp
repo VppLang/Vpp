@@ -6,12 +6,14 @@
 
 #include <iostream>
 #include <map>
+#include <string>
 
 #include "Lexer.hpp"
 #include "Token.hpp"
 #include "TokenType.hpp"
+#include "Logger.hpp"
 
-namespace lexer
+namespace VPP
 {
 
 	static std::map<std::string, TokenType> sKeyWords = 
@@ -37,10 +39,12 @@ namespace lexer
 		{"dynam", TokenType::DYNAM}
 	};
 
-	Lexer::Lexer()
+	Lexer::Lexer(Logger& p_logger)
 	:start(0),
 	current(0),
 	line(0),
+    character_number(0),
+    logger{p_logger},
 	hasError(false)
 	{
 	}
@@ -60,6 +64,15 @@ namespace lexer
 	{
 		auto curr = source.at(current);
 		current++;
+
+        if(curr == '\n')
+        {
+            character_number = 0;
+        }
+        else
+        {
+            ++character_number;
+        }
 
 		return curr;
 	}
@@ -116,7 +129,10 @@ namespace lexer
 		// if no " is found, carry on
 		while (peek() != '"' && !isAtEnd())
 		{
-			if (peek() == '\n') line++;
+			if (peek() == '\n')
+            {
+                line++;
+            }
 			advance();
 		}
 
@@ -207,6 +223,8 @@ namespace lexer
         	case '$':
         	{
         	    int nesting = 1;
+                const auto line_start{line};
+                const auto character_number_start{character_number};
         		while (nesting != 0 && !isAtEnd())
         		{
         			char last = advance();
@@ -225,7 +243,13 @@ namespace lexer
 				// it there was no closing $
     			if (nesting > 0)
     			{	
-    				std::cout << "Expected closing $ for comment. Line " << line << std::endl;
+                    logger << Log
+                        (
+                            LogType::error,
+                            "Expected closing $ for comment",
+                            line_start,
+                            character_number_start
+                        );
     				hasError = true;
     			}
 	
@@ -261,7 +285,12 @@ namespace lexer
             	else
             	{
             		hasError = true;
-            		std::cout << "Line " << line << ": Unexpected character " << c << std::endl;
+                    logger << Log
+                        {
+                            LogType::error,
+                            "Unexpected character " + c,
+                            line
+                        };
             	}
             	break;
         }
@@ -284,6 +313,7 @@ namespace lexer
 	void Lexer::scanAllTokens()
 	{
 		line = 1;
+        character_number = 0;
 		current = 0;
 		tokens.clear();
 

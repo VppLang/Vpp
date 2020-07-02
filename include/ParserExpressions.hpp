@@ -6,7 +6,7 @@
 #include <string>
 #include "Token.hpp"
 
-namespace parser
+namespace VPP
 {
     struct Expression 
     {
@@ -18,9 +18,9 @@ namespace parser
     struct Literal : public Expression
     {
     public:
-        lexer::Token type;
+        Token type;
         
-        Literal(lexer::Token type) : type(type) {}
+        Literal(Token type) : type(type) {}
         
 
         std::string get_string_form() override { return "Literal(" + type.getLiteral() + ")"; }
@@ -29,19 +29,19 @@ namespace parser
     struct Grouping : public Expression
     {
     public:
-        lexer::Token symbol_beginning, symbol_end;
+        Token symbol_beginning, symbol_end;
         Expression* expression;
         ~Grouping();
-        Grouping(lexer::Token symbol_beginning, Expression* expression, lexer::Token symbol_end) : symbol_beginning(symbol_beginning),  symbol_end(symbol_end), expression(expression) {}
+        Grouping(Token symbol_beginning, Expression* expression, Token symbol_end) : symbol_beginning(symbol_beginning),  symbol_end(symbol_end), expression(expression) {}
     };
 
     struct Unary : public Expression //Contains a prefix and expression. For example -a (negated).
     {
     public:
-        lexer::Token prefix;
+        Token prefix;
         Expression* expression;
 
-        Unary(lexer::Token prefix, Expression* expression) : prefix(prefix), expression(expression) {}
+        Unary(Token prefix, Expression* expression) : prefix(prefix), expression(expression) {}
         ~Unary() {}
 
         std::string get_string_form() override { return "Unary(" + prefix.getLexeme() + ", " + expression->get_string_form() + ")"; }
@@ -52,16 +52,16 @@ namespace parser
     public:
         Expression* left;
         Expression* right;
-        lexer::Token operator_;
+        Token operator_;
         ~Binary();
-        Binary(Expression* left, lexer::Token operator_, Expression* right) : left(left), right(right), operator_(operator_) {}
+        Binary(Expression* left, Token operator_, Expression* right) : left(left), right(right), operator_(operator_) {}
     };
 
     struct Operator_ : public Expression
     {
     public:
-        lexer::Token symbol;
+        Token symbol;
         ~Operator_();
-        Operator_(lexer::Token symbol) : symbol(symbol) {}
+        Operator_(Token symbol) : symbol(symbol) {}
     };
 }

@@ -4,7 +4,7 @@
 #include <array>
 #include <iostream>
 
-namespace lexer
+namespace VPP
 {
 	enum class TokenType
 	{

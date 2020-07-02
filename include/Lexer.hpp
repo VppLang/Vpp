@@ -9,13 +9,14 @@
 #include <string>
 
 #include "Token.hpp"
+#include "Logger.hpp"
 
-namespace lexer
+namespace VPP
 {
 	class Lexer
 	{
 	public:
-		Lexer();
+		Lexer(Logger& logger);
 
 		void loadSource(const std::string& p_source);
 
@@ -52,8 +53,10 @@ namespace lexer
 		unsigned start;
 		size_t current;
 		unsigned line;
+        unsigned character_number;
 
 		// eventually insert a Logger object here
+        Logger& logger;
 
 		bool hasError;
 

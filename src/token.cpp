@@ -3,7 +3,7 @@
 #include <iostream>
 #include <sstream>
 
-namespace lexer
+namespace VPP
 {
 
 	Token::Token()

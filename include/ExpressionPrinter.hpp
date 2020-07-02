@@ -6,7 +6,7 @@
 #include <iostream>
 #include "ParserExpressions.hpp"
 
-namespace parser
+namespace VPP
 {
     void print_expression(Expression* expression) 
     {

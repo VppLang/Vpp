@@ -1,11 +1,39 @@
 #include "IO.hpp"
 
-std::string loadFile(const char* p_fileName)
+#include <fstream>
+#include <sstream>
+#include <string>
+#include <vector>
+
+namespace VPP
 {
-    std::ifstream inFile (p_fileName);
-    std::ostringstream source;
+    using std::vector;
+    using std::string;
+    using std::ifstream;
+    using std::stringstream;
+    using std::getline;
 
-    source << inFile.rdbuf();
+    string file_name;
 
-    return source.str();  
+    vector<string> lines;
+
+    string loadFile(const char* p_fileName)
+    {
+        file_name = p_fileName;
+
+        ifstream inFile (p_fileName);
+        stringstream source;
+        source << inFile.rdbuf();
+
+        const auto source_string{source.str()};
+
+        // fills up the lines vector
+        string line;
+        while(getline(source, line))
+        {
+            lines.emplace_back(line);
+        }
+
+        return source_string;
+    }
 }
