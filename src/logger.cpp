@@ -42,15 +42,6 @@ namespace VPP
     {
     }
 
-    Log::Log(const LogType log_type, const char* message, const size_t line, const size_t char_number)
-        :
-            m_log_type{log_type},
-            m_message{string{message}},
-            m_line{line},
-            m_char_number{char_number}
-    {
-    }
-
     ostream& operator<<(ostream& stream, const Log& log)
     {
         stream << LOC << file_name << ":";
@@ -129,20 +120,6 @@ namespace VPP
     }
 
     void Logger::emplace_back(const LogType log_type, const string& message, const size_t line, const size_t char_number)
-    {
-        m_logs.emplace_back
-            (
-                Log
-                {
-                    log_type,
-                    message,
-                    line,
-                    char_number
-                }
-            );
-    }
-
-    void Logger::emplace_back(const LogType log_type, const char* message, const size_t line, const size_t char_number)
     {
         m_logs.emplace_back
             (
