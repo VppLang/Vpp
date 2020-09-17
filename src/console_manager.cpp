@@ -84,5 +84,6 @@ namespace VPP
         // Reset console mode
         tcsetattr(STDIN_FILENO, TCSANOW, &orig_term);
     }
-    #endif
 }
+
+#endif
