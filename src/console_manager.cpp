@@ -11,7 +11,7 @@
 #else
 #include <termios.h>
 #include <unistd.h>
-#endif
+#endif // _WIN32
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -20,10 +20,12 @@
 // Some old MinGW/CYGWIN distributions don't define this:
 #ifndef ENABLE_VIRTUAL_TERMINAL_PROCESSING
 #define ENABLE_VIRTUAL_TERMINAL_PROCESSING  0x0004
-#endif
+#endif // ENABLE_VIRTUAL_TERMINAL_PROCESSING
+#endif // _WIN32
 
 namespace VPP
 {
+#ifdef ENABLE_VIRTUAL_TERMINAL_PROCESSING
     static HANDLE stdoutHandle, stdinHandle;
     static DWORD outModeInit, inModeInit;
 
@@ -63,7 +65,7 @@ namespace VPP
             exit(GetLastError());
         }
     }
-    #else
+#else
 
     static struct termios orig_term;
     static struct termios new_term;
@@ -84,6 +86,5 @@ namespace VPP
         // Reset console mode
         tcsetattr(STDIN_FILENO, TCSANOW, &orig_term);
     }
+#endif // ENABLE_VIRTUAL_TERMINAL_PROCESSING
 }
-
-#endif
