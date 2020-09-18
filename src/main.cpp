@@ -9,6 +9,7 @@
 #include "ParserExpressions.hpp"
 #include "ExpressionPrinter.hpp"
 
+#include "ConsoleManager.hpp"
 #include "Logger.hpp"
 
 
@@ -28,6 +29,8 @@ int main()
 
     VPP::print_expression(e);
 
+    VPP::setupConsole();
+    
     // test logs
     {
         logger.emplace_back
@@ -75,6 +78,8 @@ int main()
     // integral indexing
     std::cerr << logger[2];
     std::cerr << logger[-2];
+
+    VPP::restoreConsole();
 
     delete e;
 
